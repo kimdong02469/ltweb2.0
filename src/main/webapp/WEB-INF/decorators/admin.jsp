@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	trang chủ của user
+
+	<%@ include file="/commons/admin/header.jsp" %>
+	
+	<sitemesh:write property="body" />
+	
+	<%@ include file="/commons/admin/footer.jsp" %>
+
 </body>
 </html>
