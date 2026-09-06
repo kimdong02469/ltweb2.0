@@ -5,28 +5,32 @@ import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="categories")
-@NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
+@Table(name = "categories")
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="categoryId")
+	@Column(name = "categoryId")
 	private int categoryId;
 
-	@Column(name="categoryname", columnDefinition ="NVARCHAR(255) NULL")
+	@Column(name = "categoryname", columnDefinition = "NVARCHAR(255) NULL")
 	private String categoryname;
 
-	@Column(name="images", columnDefinition ="NVARCHAR(255) NULL")
+	@Column(name = "images", columnDefinition = "NVARCHAR(255) NULL")
 	private String images;
 
-	@Column(name="status")
+	@Column(name = "status")
 	private int status;
 
-	//bi-directional many-to-one association to Video
-	@OneToMany(mappedBy="categories")
+	// bi-directional many-to-one association to Video
+	@OneToMany(mappedBy = "categories")
 	private List<Video> videos;
+
+	// bi-directional many-to-one association to Product
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private List<Product> products;
 
 	public Category() {
 	}
@@ -81,5 +85,25 @@ public class Category implements Serializable {
 		getVideos().remove(video);
 		video.setCategory(null);
 		return video;
+	}
+
+	public List<Product> getProducts() {
+		return this.products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public Product addProduct(Product product) {
+		getProducts().add(product);
+		product.setCategory(this);
+		return product;
+	}
+
+	public Product removeProduct(Product product) {
+		getProducts().remove(product);
+		product.setCategory(null);
+		return product;
 	}
 }

@@ -31,11 +31,16 @@
 			<!-- BEGIN TOP BAR MENU -->
 			<div class="col-md-6 col-sm-6 additional-nav">
 				<ul class="list-unstyled list-inline pull-right">
-					<li><a href="${pageContext.request.contextPath}/profile">My Account</a></li>
+					<li><a href="${pageContext.request.contextPath}/profile">My
+							Account</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/admin/products">Quản
+							Lý Sản Phẩm</a></li>
 					<li><a href="shop-wishlist.html">My Wishlist</a></li>
 					<li><a href="shop-checkout.html">Checkout</a></li>
-					<li>
-					<c:choose>
+					<li><a href="${pageContext.request.contextPath}/waiting">Trang
+							Chủ</a></li>
+					<li><c:choose>
 							<c:when test="${sessionScope.account == null}">
 								<a href="${pageContext.request.contextPath}/login">Login</a> 
 								|<a href="${pageContext.request.contextPath}/register">Register</a>
@@ -44,7 +49,7 @@
 								<a href="${pageContext.request.contextPath}/member/myaccount">${sessionScope.account.fullname}</a>
 								| <a href="${pageContext.request.contextPath}/logout">Logout</a>
 							</c:otherwise>
-					</c:choose></li>
+						</c:choose></li>
 				</ul>
 			</div>
 			<!-- END TOP BAR MENU -->
