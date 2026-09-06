@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
 	<!-- Loại trừ index.jsp khỏi khung web chung -->
-	<mapping path="/index.jsp" exclude="true" />
-	<mapping path="/login.jsp" exclude="true" />
-	
+	<!-- <mapping path="/index.jsp" exclude="true" /> -->
+
 	<mapping path="/user/*" name="user" decorator="user.jsp" />
-	<mapping path="/*" name="web" decorator="web.jsp" /> 
+	<mapping path="/*" name="web" decorator="web.jsp" />
 	<mapping path="/admin/*" name="admin" decorator="admin.jsp" />
 	<mapping path="/manager/*" name="manager"
 		decorator="manager.jsp" />

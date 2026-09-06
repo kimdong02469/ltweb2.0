@@ -53,6 +53,13 @@ public class LoginController extends HttpServlet {
 		// Xử lý bài toán
 		User user = service.login(username, password);
 		if (user != null) {
+			// kiểm tra kích hoạt OTP 
+			if (user.getIsVerify() == null || user.getIsVerify() == 0) {
+				alertMsg = "Tài khoản chưa được kích hoạt mã OTP!";
+				req.setAttribute("alert", alertMsg);
+				req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+				return;
+			}
 			HttpSession session = req.getSession(true);
 			session.setAttribute("account", user);
 			if (isRememberMe) {

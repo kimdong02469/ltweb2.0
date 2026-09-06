@@ -40,6 +40,12 @@ public class User implements Serializable {
 	@Column(name = "createdDate")
 	private Date createdDate;
 	
+	@Column(name = "isVerify")
+	private Integer isVerify; // 0: chưa kích hoạt, 1: đã kích hoạt
+
+	@Column(name = "code", length = 10)
+	private String code;
+	
 	public User() {
 		super();
 	}
@@ -128,6 +134,22 @@ public class User implements Serializable {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+	
+	public Integer getIsVerify() {
+	    return isVerify;
+	}
+
+	public void setIsVerify(Integer isVerify) {
+	    this.isVerify = isVerify;
+	}
+
+	public String getCode() {
+	    return code;
+	}
+
+	public void setCode(String code) {
+	    this.code = code;
 	}
 
 	@Override

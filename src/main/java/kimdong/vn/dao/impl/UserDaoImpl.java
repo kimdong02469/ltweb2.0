@@ -65,6 +65,41 @@ public class UserDaoImpl implements IUserDao {
 	        enm.close();
 	    }
 	}
+	
+	@Override
+	public User findByEmail(String email) {
+		EntityManager enm = JPAConfig.getEntityManager();
+		try {
+			String jpql = "SELECT u FROM User u WHERE u.email = :email";
+			TypedQuery<User> query = enm.createQuery(jpql, User.class);
+			query.setParameter("email", email);
+			List<User> list = query.getResultList();
+			return list.isEmpty() ? null : list.get(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			enm.close();
+		}
+	}
+
+	@Override
+	public void update(User user) {
+		EntityManager enm = JPAConfig.getEntityManager();
+		EntityTransaction trans = enm.getTransaction();
+		try {
+			trans.begin();
+			enm.merge(user); // Cập nhật entity vào database
+			trans.commit();
+		} catch (Exception e) {
+			if (trans.isActive()) {
+				trans.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			enm.close();
+		}
+	}
 
 	public static void main(String[] args) {
 		IUserDao userdao = new UserDaoImpl();

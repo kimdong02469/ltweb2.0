@@ -13,5 +13,9 @@ public interface IUserDao {
 	void insert(User user);
 	
 	User findByUserName(String username);
+	
+	User findByEmail(String email);
+	
+	void update(User user);
 
 }
